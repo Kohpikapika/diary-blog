@@ -3,16 +3,40 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title = '3行日記' } = Astro.props;
+const {
+  title = "3行日記",
+  description = "毎日の小さな積み上げを記録するブログ",
+  ogImage = "/ogp.png",
+} = Astro.props;
+
+const pageTitle = `${title} | 3行日記`;
+const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body class="bg-zinc-50 text-zinc-900">
     <header class="mx-auto max-w-2xl px-4 pt-8 pb-6">
@@ -23,4 +47,16 @@ const { title = '3行日記' } = Astro.props;
       <slot />
     </main>
   </body>
+  <footer class="mx-auto max-w-2xl px-4 pb-10 pt-6 text-sm text-zinc-500">
+    <p>
+      Built by
+      <a
+        href="https://github.com/Kohpikapika"
+        class="underline hover:text-zinc-700"
+        target="_blank"
+      >
+        @KohPika
+      </a>
+    </p>
+  </footer>
 </html>

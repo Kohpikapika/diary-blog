@@ -1,17 +1,27 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
+const posts = await getCollection('diary');
+const sortedPosts = posts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="3行日記">
+  <section class="space-y-3">
+    {sortedPosts.map((post) => (
+      <a
+        href={`/diary/${post.id}`}
+        class="block rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      >
+        <p class="text-sm text-zinc-500">
+          {post.data.date.toLocaleDateString("ja-JP")}
+        </p>
+        <h2 class="mt-1 text-lg font-semibold text-zinc-900">
+          {post.data.title}
+        </h2>
+      </a>
+    ))}
+  </section>
+</BaseLayout>

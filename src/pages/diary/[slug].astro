@@ -14,10 +14,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const description = `${post.data.date.toLocaleDateString("ja-JP")}の日記`;
+const ogImage = `/api/og.png?title=${encodeURIComponent(post.data.title)}`;
 
 ---
 
-<BaseLayout title={post.data.title} description={description}>
+<BaseLayout title={post.data.title} description={description} ogImage={ogImage}>
   <article class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
     <p class="text-sm text-zinc-500">
       {post.data.date.toLocaleDateString("ja-JP")}

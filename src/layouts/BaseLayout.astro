@@ -8,12 +8,12 @@ interface Props {
 }
 
 const {
-  title = "3行日記",
-  description = "毎日の小さな積み上げを記録するブログ",
+  title = "チャハーンの3行日記",
+  description = "あるリスナーの小さな記録",
   ogImage = "/ogp.png",
 } = Astro.props;
 
-const pageTitle = `${title} | 3行日記`;
+const pageTitle = `${title} | チャハーンの3行日記`;
 const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 
@@ -42,8 +42,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toStri
   </head>
   <body class="bg-zinc-50 text-zinc-900">
     <header class="mx-auto max-w-2xl px-4 pt-8 pb-6">
-      <a href="/" class="text-2xl font-bold tracking-tight">3行日記</a>
-      <p class="mt-2 text-sm text-zinc-600">毎日の小さな記録</p>
+      <a href="/" class="text-2xl font-bold tracking-tight">チャハーンの3行日記</a>
+      <p class="mt-2 text-sm text-zinc-600">あるリスナーの小さな記録</p>
     </header>
     <main class="mx-auto max-w-2xl px-4 pb-12">
       <slot />
@@ -51,7 +51,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toStri
   </body>
   <footer class="mx-auto max-w-2xl px-4 pb-10 pt-6 text-sm text-zinc-500">
     <p>
-      Built by
+      Created by
       <a
         href="https://github.com/Kohpikapika"
         class="underline hover:text-zinc-700"
